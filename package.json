@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "Iniciar": "nodemon backend/backend.js"
+    "Iniciar": "nodemon backend/backend.js",
+    "start": "node backend/backend.js"
   },
   "keywords": [],
   "type": "commonjs",
