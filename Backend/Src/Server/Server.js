@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const {createServer} = require('http');
 const rutasWeb = require('../Routes/routes.js');
-
+const path = require('path'); // Necesario para gestionar rutas de archivos
 
 class Server {
     constructor() {
@@ -34,6 +34,9 @@ class Server {
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(express.static('Static'));
+        // Redirigir todas las rutas no manejadas a `index.html`
+        this.express.get('/*', (req, res) => {
+            express.static(path.join(__dirname, '..', 'static', 'index.html'));        });
     }
 
     async iniciarServidor() {
