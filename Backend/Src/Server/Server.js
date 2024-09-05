@@ -23,7 +23,18 @@ class Server {
 
     }
     async rutas() {
+        this.express.use(express.static('Static'));
         this.express.use('/', rutasWeb);
+        this.express.get('/*', (req, res) => {
+            res.sendFile(path.resolve( 'Static', 'index.html'), (err) => {
+                if (err) {
+                    res.status(500).send(err);
+                }
+            });
+        });
+
+
+
     }
 
     async configurarMiddleWares() {
@@ -33,14 +44,11 @@ class Server {
         this.rutas();
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
-        this.express.use(express.static('Static'));
+
         // Redirigir todas las rutas no manejadas a `index.html`
         // this.express.get('/*', (req, res) => {
-        //     res.sendFile(path.resolve( __dirname  + '..', '/Static', 'index.html'), (err) => {
-        //         if (err) {
-        //             res.status(500).send(err);  // Si hay un error, envía un código de error 500
-        //         }
-        //     });});
+        //     this.express.use('Static');});
+
 
     }
 
